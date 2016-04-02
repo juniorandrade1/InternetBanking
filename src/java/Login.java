@@ -8,6 +8,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,11 +38,14 @@ public class Login extends HttpServlet {
         inicializaJdbc();
     }
     
+    PreparedStatement pstm;
+    
      private void inicializaJdbc() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection c = DriverManager.getConnection("jdbc:mysql://localhost/JAVABANK", "root", "");
-            System.out.println("OK");
+            //System.out.println("OK");
+            //pstm = c.prepareStatement("select * from LOGINS with username like ? and numero like ? and password like ?");
             //pNome = c.prepareStatement("select * from aluno where nome like ?");
             //pSobre = c.prepareStatement("select * from aluno where sobrenome like ?");
             //pEmail = c.prepareStatement("select * from aluno where email like ?");
@@ -46,14 +54,33 @@ public class Login extends HttpServlet {
         }
     }
      
+     public void executeQuery(String username, String numero, String password) throws SQLException {     
+        pstm.setInt(1, Integer.parseInt(username));
+        pstm.setString(2, numero);
+        pstm.setString(3, password);
+     }
+     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             init();
-            String nome = request.getParameter("nome");
-            String senha = request.getParameter("senha");
+            String username = request.getParameter("username");
+            String numero = request.getParameter("numero");
+            String password = request.getParameter("senha");
+            //executeQuery(username, numero, password);
+       
+            
+            //ResultSet rs = pstm.executeQuery();
+//            if(rs.next()) {
+//                
+//            }
+//            else {
+//                
+//            }
+            
+            
             
             
             out.println("<!DOCTYPE html>");
@@ -62,7 +89,7 @@ public class Login extends HttpServlet {
             out.println("<title>Servlet Login</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Login at " + nome + "</h1>");
+            out.println("<h1>Servlet Login at " + username + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -80,7 +107,11 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -94,7 +125,11 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
