@@ -6,13 +6,6 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Júnior
  */
-public class Login extends HttpServlet {
+public class HB extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,35 +26,66 @@ public class Login extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    public void init() throws ServletException {
-        inicializaJdbc();
-    }
-    PreparedStatement pstm;
-     private void inicializaJdbc() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection c = DriverManager.getConnection("jdbc:mysql://localhost/JAVABANK", "root", "");
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
-    }
-     
-     public void executeQuery(String username, String numero, String password) throws SQLException {     
-        pstm.setInt(1, Integer.parseInt(username));
-        pstm.setString(2, numero);
-        pstm.setString(3, password);
-     }
-     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           /* TODO output your page here. You may use following sample code. */
-           init();
-           String username = request.getParameter("username");
-           String numero = request.getParameter("numero");
-           String password = request.getParameter("senha");
-           
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Sistema HomeBanking</title>");            
+            
+            /////////////////////INICIO CSS///////////////////////////
+            out.println("<style type=\"text/css\">");
+            out.println("<!--");
+            out.println("body {");
+            out.println("padding:0px;");
+            out.println("margin:0px;");
+            out.println("}");
+            out.println("#menu ul{");
+            out.println("padding:0px;");
+            out.println("margin:0px;\n" +
+			"float: left;\n" +
+			"width: 100%;\n" +
+			"background-color:#EDEDED;\n" +
+			"list-style:none;\n" +
+			"font:80% Tahoma;");
+            out.println("}");
+            out.println("#menu ul li { display: inline; }\n" +
+" \n" +
+"		#menu ul li a {\n" +
+"			background-color:#EDEDED;\n" +
+"			color: #333;\n" +
+"			text-decoration: none;\n" +
+"			border-bottom:3px solid #EDEDED;\n" +
+"			padding: 2px 10px;\n" +
+"			float:left;\n" +
+"		}\n" +
+" \n" +
+"		#menu ul li a:hover {\n" +
+"			background-color:#D6D6D6;\n" +
+"			color: #6D6D6D;\n" +
+"			border-bottom:3px solid #EA0000;\n" +
+"		}\n" +
+"	-->\n" +
+"	</style>");
+            /////////////////FIM CSS/////////////////////
+            
+            out.println("</head>");
+            out.println("<body>");
+            
+            out.println(""
+                    + "<div id=\"menu\">\n" +
+                        "<ul>\n" +
+                            "<li><a href=\"\">Home</a></li>\n" +
+                            "<li><a href=\"\">Consultar Saldo</a></li>\n" +
+                            "<li><a href=\"\">Sair</a></li>\n" +
+        		"</ul>\n" +
+                "</div>");
+            
+            out.println("</body>");
+            
+            out.println("</html>");
         }
     }
 
@@ -77,11 +101,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -95,11 +115,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

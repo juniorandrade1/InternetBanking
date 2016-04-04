@@ -4,9 +4,17 @@
         <servlet-name>Login</servlet-name>
         <servlet-class>Login</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TelaUsuárioComum</servlet-name>
+        <servlet-class>HB</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TelaUsuárioComum</servlet-name>
+        <url-pattern>/TelaUsu_rioComum</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
