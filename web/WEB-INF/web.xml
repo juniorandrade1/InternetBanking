@@ -2,10 +2,42 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>ShowBalance</servlet-name>
-        <servlet-class>ShowBalance</servlet-class>
+        <servlet-class>ProcessaLogins</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginFuncionarios</servlet-name>
+        <servlet-class>LoginFuncionarios</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RealizarTransferencia</servlet-name>
+        <servlet-class>RealizarTransferencia</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NovaConta</servlet-name>
+        <servlet-class>NovaConta</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NovoUsuario</servlet-name>
+        <servlet-class>NovoUsuario</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ShowBalance</servlet-name>
         <url-pattern>/ShowBalance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginFuncionarios</servlet-name>
+        <url-pattern>/LoginFuncionarios</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RealizarTransferencia</servlet-name>
+        <url-pattern>/RealizarTransferencia</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NovaConta</servlet-name>
+        <url-pattern>/NovaConta</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NovoUsuario</servlet-name>
+        <url-pattern>/NovoUsuario</url-pattern>
     </servlet-mapping>
 </web-app>
