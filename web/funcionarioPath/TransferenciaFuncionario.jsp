@@ -1,6 +1,6 @@
 <%-- 
-    Document   : SaldoCliente
-    Created on : 06/04/2016, 16:07:04
+    Document   : TransferenciaFuncionario
+    Created on : 08/04/2016, 02:58:34
     Author     : Júnior
 --%>
 
@@ -9,10 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Saldo</title>
+        <title>JSP Page</title>
     </head>
     <body>
-        <h1>Ola Senhor(a) ${user.firstName}</h1><br>
-        <h1>Seu saldo é de ${user.balance} </h1><br>
+        <h1>Transferencia Funcionario!</h1>
     </body>
 </html>

@@ -13,9 +13,9 @@
     </head>
     <body>
         <h1>Ola Senhor(a) ${func.firstName}, funcionario do tipo ${func.type} </h1><br>
-        <a href="CriarConta.jsp">Criar Conta</a><br>
-        <a href="TransferenciaFuncionario.jsp">Realizar Transferencia</a><br>
-        <a href="SaldoFuncionario.jsp">Verificar Saldo</a><br>
-        <a href="ExtratoFuncionario.jsp">Verificar Extrato</a><br>
+        <a href="funcionarioPath/CriarConta.jsp">Criar Conta</a><br>
+        <a href="funcionarioPath/TransferenciaFuncionario.jsp">Realizar Transferencia</a><br>
+        <a href="funcionarioPath/SaldoFuncionario.jsp">Verificar Saldo</a><br>
+        <a href="funcionarioPath/ExtratoFuncionario.jsp">Verificar Extrato</a><br>
     </body>
 </html>
