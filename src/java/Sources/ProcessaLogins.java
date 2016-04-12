@@ -1,3 +1,4 @@
+package Sources;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
@@ -24,12 +25,11 @@ public class ProcessaLogins extends HttpServlet {
             String CPF = bd.verifyInfo(username, senha, numero);
             if (CPF != null){
                 ClassConta Conta = bd.getConta(numero);
-                 //System.out.println(Correntista.getNome());
-                //request.getSession().setAttribute("Conta", Conta);
+                request.getSession().setAttribute("Conta", Conta);
+                
                 ClassCorrentista Correntista = bd.getCorrentista(CPF);
-               
                 request.getSession().setAttribute("Correntista", Correntista);
-                address = "HomeUser.jsp";
+                address = "/clientePath/HomeUser.jsp";
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProcessaLogins.class.getName()).log(Level.SEVERE, null, ex);

@@ -2,23 +2,27 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>ShowBalance</servlet-name>
-        <servlet-class>ProcessaLogins</servlet-class>
+        <servlet-class>Sources.ProcessaLogins</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginFuncionarios</servlet-name>
-        <servlet-class>LoginFuncionarios</servlet-class>
+        <servlet-class>Sources.LoginFuncionarios</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RealizarTransferencia</servlet-name>
-        <servlet-class>RealizarTransferencia</servlet-class>
+        <servlet-class>Sources.RealizarTransferencia</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>NovaConta</servlet-name>
-        <servlet-class>NovaConta</servlet-class>
+        <servlet-class>Sources.NovaConta</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>NovoUsuario</servlet-name>
-        <servlet-class>NovoUsuario</servlet-class>
+        <servlet-class>Sources.NovoUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getExtrato</servlet-name>
+        <servlet-class>Sources.getExtrato</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ShowBalance</servlet-name>
@@ -39,5 +43,9 @@
     <servlet-mapping>
         <servlet-name>NovoUsuario</servlet-name>
         <url-pattern>/NovoUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getExtrato</servlet-name>
+        <url-pattern>/getExtrato</url-pattern>
     </servlet-mapping>
 </web-app>

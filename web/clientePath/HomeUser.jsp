@@ -12,9 +12,9 @@
         <title>Home Page</title>
     </head>
     <body>
-        <h1>Ola Senhor(a) ${Correntista.Nome} </h1><br>
+        <h1>Ola Senhor(a) ${Correntista.nome}, conta ${Conta.numero} </h1><br>
         <a href="clientePath/TransferenciaUsuario.jsp">Realizar Transferencia</a><br>
-        <a href="clientePath/Saldo.jsp">Verificar Saldo</a><br>
-        <a href="clientePath/Extrato.jsp">Verificar Extrato</a><br>
+        <a href="Saldo.jsp">Verificar Saldo</a><br>
+        <a href="Extrato.jsp">Verificar Extrato</a><br>
     </body>
 </html>

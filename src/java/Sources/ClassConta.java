@@ -1,3 +1,5 @@
+package Sources;
+
 
 import java.io.Serializable;
 
@@ -12,8 +14,13 @@ import java.io.Serializable;
  * @author Júnior
  */
 public class ClassConta implements Serializable{
-    private String Numero, PrimeiroCorr, SegundoCorr, TerceiroCorr;
-    private double Saldo, Limite;
+    String Numero;
+    String PrimeiroCorr;
+    String SegundoCorr;
+    String TerceiroCorr;
+    double Saldo;
+    double Limite;
+    
     public ClassConta(String a, String b, String c, String d, double e, double f) {
        this.Numero = a;
        this.PrimeiroCorr = b;
@@ -22,6 +29,7 @@ public class ClassConta implements Serializable{
        this.Saldo = e;
        this.Limite = f;
    }
+    
    public void setNumero(String s){ this.Numero = s; }
    public void setPrimeiroCorr(String s){ this.PrimeiroCorr = s; }
    public void setSegundoCorr(String s){ this.SegundoCorr = s; }

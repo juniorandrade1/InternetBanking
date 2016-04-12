@@ -12,7 +12,7 @@
         <title>Saldo</title>
     </head>
     <body>
-        <h1>Ola Senhor(a) ${Conta.Numero}</h1><br>
-        <h1>Seu saldo é de ${user.balance} </h1><br>
+        <h1>Ola Senhor(a) ${Correntista.nome}</h1><br>
+        <h1>Seu saldo é de ${Conta.saldo} </h1><br>
     </body>
 </html>

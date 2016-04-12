@@ -1,3 +1,5 @@
+package Sources;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,18 +17,31 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Júnior
  */
-public class LoginFuncionarios extends HttpServlet {
+public class NovoUsuario extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<html><head><b>Acesso restrito</b><br></head><form id=\"Login\" method=\"Post\" action=\"ShowBalance\">\n" +
-"                Username: <input type=\"text\" name=\"username\"><br><br>\n" +
-"                Senha: <input type=\"password\" name=\"senha\"><br><br>\n" +
-"                <input type=\"submit\" value=\"Efetuar Login\">\n" +
-"                \n" +
-"            </form></html>");
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet NovoUsuario</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>maoe</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
