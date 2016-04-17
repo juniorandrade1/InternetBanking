@@ -35,7 +35,7 @@ public class BDQuerys {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(BDQuerys.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Connection c = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/JAVABANK", "root", "VcTr100");
+        Connection c = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/JAVABANK", "root", "");
         
         pstmt = (PreparedStatement) c.prepareStatement(getLogin);
         pstmt.setString(1, username);
@@ -56,7 +56,7 @@ public class BDQuerys {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(BDQuerys.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Connection c = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/JAVABANK", "root", "VcTr100");
+        Connection c = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/JAVABANK", "root", "");
         pstmt = (PreparedStatement) c.prepareStatement(getConta);
         pstmt.setString(1, numero);
         ResultSet rs = pstmt.executeQuery();
@@ -76,7 +76,7 @@ public class BDQuerys {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(BDQuerys.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Connection c = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/JAVABANK", "root", "VcTr100");
+        Connection c = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/JAVABANK", "root", "");
         pstmt = (PreparedStatement) c.prepareStatement(getCorrentista);
         pstmt.setString(1, CPF);
         ResultSet rs = pstmt.executeQuery();
@@ -99,7 +99,7 @@ public class BDQuerys {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(BDQuerys.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Connection c = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/JAVABANK", "root", "VcTr100");
+        Connection c = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/JAVABANK", "root", "");
         pstmt = (PreparedStatement) c.prepareStatement(getFuncionario);
         pstmt.setString(1, CPF);
         ResultSet rs = pstmt.executeQuery();
@@ -118,7 +118,7 @@ public class BDQuerys {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(BDQuerys.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Connection c = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/JAVABANK", "root", "VcTr100");
+        Connection c = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/JAVABANK", "root", "");
         pstmt = (PreparedStatement) c.prepareStatement(updateTransacaoTransf);
         pstmt.setString(1, a);
         pstmt.setString(2, b);
@@ -136,7 +136,7 @@ public class BDQuerys {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(BDQuerys.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Connection c = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/JAVABANK", "root", "VcTr100");
+        Connection c = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/JAVABANK", "root", "");
         pstmt = (PreparedStatement) c.prepareStatement(setSaldo);
         pstmt.setDouble(1, value);
         pstmt.setString(2, conta);

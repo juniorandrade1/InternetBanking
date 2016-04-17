@@ -23,7 +23,7 @@ public class LoginFuncionarios extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<html><head><b>Acesso restrito</b><br></head><form id=\"Login\" method=\"Post\" action=\"ShowBalance\">\n" +
+            out.println("<html><head><b>Acesso restrito</b><br><br></head><form id=\"Login\" method=\"Post\" action=\"ShowBalance\">\n" +
 "                Username: <input type=\"text\" name=\"username\"><br><br>\n" +
 "                Senha: <input type=\"password\" name=\"senha\"><br><br>\n" +
 "                <input type=\"submit\" value=\"Efetuar Login\">\n" +
