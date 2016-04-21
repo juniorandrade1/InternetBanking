@@ -8,6 +8,9 @@ package Sources;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +37,7 @@ public class NovaConta extends HttpServlet {
     }
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
@@ -42,30 +45,50 @@ public class NovaConta extends HttpServlet {
             String pCorr = request.getParameter("priCorr");
             String sCorr = request.getParameter("segCorr");
             String tCorr = request.getParameter("terCorr");
-            String saldo = request.getParameter("saldo");
-            String limite = request.getParameter("limite");
+            double saldo = Double.parseDouble(request.getParameter("saldo"));
+            double limite = Double.parseDouble(request.getParameter("limite"));
             //
             
-            if(pCorr.isEmpty()) {
-                System.out.println("Primeiro Correntista não escolhido");
+            
+            System.out.println("Entrou aqui");
+            
+            
+            if(pCorr.compareTo("") == 0) {
+                System.out.println("Primeiro Correntista não inserido");
+                pCorr = null;
             }
-            else if(!existUser(pCorr)){
-                
+            else {
+                if(!existUser(pCorr)) {
+                    System.out.println("Primeiro Correntista não válido");
+                    pCorr = null;
+                }
             }
             
-            if(sCorr.isEmpty()) {
-                System.out.println("Segundo Correntista não escolhido");
+             if(sCorr.compareTo("") == 0) {
+                System.out.println("Segundo Correntista não inserido");
+                sCorr = null;
             }
-            else if(!existUser(sCorr)){
-                
-            }
+             else {
+                 if(!existUser(sCorr)) {
+                     System.out.println("Segundo Correntista não existe");
+                    sCorr = null;
+                 }
+             }
             
-            if(tCorr.isEmpty()) {
+            if(tCorr.compareTo("") == 0) {
                 System.out.println("Terceiro Correntista não escolhido");
+                tCorr = null;
             }
-            else if(!existUser(tCorr)){
-                
+            else {
+                if(!existUser(tCorr)) {
+                    System.out.println("Terceiro Correntista não existe");
+                    tCorr = null;
+                }
             }
+            
+            QuerysBd bd = new QuerysBd();
+            bd.createConta(pCorr, sCorr, tCorr, saldo, limite);
+            out.println("Conta Criada");
         }
     }
 
@@ -81,7 +104,11 @@ public class NovaConta extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(NovaConta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -95,7 +122,11 @@ public class NovaConta extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(NovaConta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

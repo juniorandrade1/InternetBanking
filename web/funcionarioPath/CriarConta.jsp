@@ -15,12 +15,13 @@
         <h1>
             <b>Nova Conta</b><br>
             <h2>
-            <br>Insira o CPF dos correntistas. Caso não exista, será<br>
-            disponibilizada a opção de criação. Campos de correntista<br>
-            em branco serão considerados como não existente.<br>
-            <br></h2>
+                <br>Insira o CPF de Correntistas Validos<br>
+                O 1º Correntista é obrigatorio. Deixando os demais em branco, <br>
+                será considerado como não existente.<br>
+                <br>
+            </h2>
         </h1>
-        <form id="CriarConta" method="POST" action="NovaConta">     
+        <form id="CriarConta" method="POST" action="/InternetBanking/NovaConta">     
             Primeiro Correntista: <input type="text" name="priCorr"><br><br>
             Segundo Correntista: <input type="text" name="segCorr"><br><br>
             Terceiro Correntista: <input type="text" name="terCorr"><br><br>

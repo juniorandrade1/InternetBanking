@@ -17,12 +17,16 @@
         <servlet-class>Sources.NovaConta</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>NovoUsuario</servlet-name>
-        <servlet-class>Sources.NovoUsuario</servlet-class>
+        <servlet-name>getExtratoFunc</servlet-name>
+        <servlet-class>Sources.getExtratoFunc</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>getExtrato</servlet-name>
-        <servlet-class>Sources.getExtrato</servlet-class>
+        <servlet-name>getSaldoFunc</servlet-name>
+        <servlet-class>Sources.getSaldoFunc</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NovoCorrentista</servlet-name>
+        <servlet-class>Sources.NovoCorrentista</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ShowBalance</servlet-name>
@@ -41,11 +45,15 @@
         <url-pattern>/NovaConta</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>NovoUsuario</servlet-name>
-        <url-pattern>/NovoUsuario</url-pattern>
+        <servlet-name>getExtratoFunc</servlet-name>
+        <url-pattern>/getExtratoFunc</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>getExtrato</servlet-name>
-        <url-pattern>/getExtrato</url-pattern>
+        <servlet-name>getSaldoFunc</servlet-name>
+        <url-pattern>/getSaldoFunc</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NovoCorrentista</servlet-name>
+        <url-pattern>/NovoCorrentista</url-pattern>
     </servlet-mapping>
 </web-app>

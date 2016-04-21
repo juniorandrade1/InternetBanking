@@ -13,10 +13,10 @@ import javax.servlet.http.*;
 
 public class ProcessaLogins extends HttpServlet {
     
-    private BDQuerys bd;
+    private Bdquerys bd;
     //Recebe Logins Gerais
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        bd = new BDQuerys();
+        bd = new Bdquerys();
         String username = request.getParameter("username");
         String senha = request.getParameter("senha");
         String numero = request.getParameter("numero");
@@ -24,11 +24,16 @@ public class ProcessaLogins extends HttpServlet {
         try {
             String CPF = bd.verifyInfo(username, senha, numero);
             if (CPF != null){
+                
                 ClassConta Conta = bd.getConta(numero);
                 request.getSession().setAttribute("Conta", Conta);
                 
                 ClassCorrentista Correntista = bd.getCorrentista(CPF);
                 request.getSession().setAttribute("Correntista", Correntista);
+                
+                //ClassTransacao Transacao = bd.getTransacao(CPF);
+                //request.getSession().setAttribute("Transacao", Transacao);
+                
                 address = "/clientePath/HomeUser.jsp";
             }
         } catch (SQLException ex) {
@@ -41,14 +46,24 @@ public class ProcessaLogins extends HttpServlet {
 
     // Post recebe login funcionarios
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //BankCustomer customer = BankCustomerLookup.getCustomer(request.getParameter("username"));
-        //request.getSession().setAttribute("func", customer);
-        String address = "WEB-INF/UnknownCustomer.jsp";
-//        if (customer == null) {
-//            address = "WEB-INF/UnknownCustomer.jsp";
-//        } else {
-//            address = "HomeFunc.jsp";
-//        }
+       bd = new Bdquerys();
+        String username = request.getParameter("username");
+        String senha = request.getParameter("senha");
+        String numero = request.getParameter("numero");
+        String address = address = "WEB-INF/UnknownCustomer.jsp";
+        try {
+            String CPF = bd.verifyInfo(username, senha, numero);
+            if (CPF != null){
+                ClassFuncionario Funcionario = bd.getFuncionario(numero);
+                if(Funcionario != null) {
+                   System.out.println(Funcionario.getNome() + " " + Funcionario.getFuncao());
+                   request.getSession().setAttribute("Funcionario", Funcionario);
+                   address = "/funcionarioPath/HomeFunc.jsp";
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProcessaLogins.class.getName()).log(Level.SEVERE, null, ex);
+        }
         RequestDispatcher dispatcher = request.getRequestDispatcher(address);
         dispatcher.forward(request, response);
     }

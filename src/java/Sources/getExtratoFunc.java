@@ -1,13 +1,16 @@
-package Sources;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package Sources;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Júnior
  */
-public class NovoUsuario extends HttpServlet {
+public class getExtratoFunc extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,19 +32,35 @@ public class NovoUsuario extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet NovoUsuario</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>maoe</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            //out.println("AQUI");
+            
+            Bdquerys bd = new Bdquerys();
+            String val = request.getParameter("codigo");
+            ArrayList<ClassTransacao>arr = bd.getAllExtrato(val);
+            out.println("<h1>Transacoes</h1><br><br>");
+                
+            out.println("<table border=\"1\" style=\"width:100%\">");
+            out.println("<tr>");
+            out.println("<th>Tipo</th>");
+            out.println("<th>Nro. Conta</th>");
+            out.println("<th>Nro. Conta Transf</th>");
+            out.println("<th>Valor</th>");
+            out.println("</tr>");
+            
+                    
+            for(ClassTransacao it : arr) {
+                out.println("<tr>");
+                out.println("<td>" + it.getTipo() + "</td>");
+                out.println("<td>" + it.getNroConta()+ "</td>");
+                out.println("<td>" + it.getNroContaTransf()+ "</td>");
+                out.println("<td>" + it.getValor()+ "</td>");
+                out.println("</tr>");
+            }
+            out.println("</table>");
+            
         }
     }
 
@@ -57,7 +76,11 @@ public class NovoUsuario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(getExtratoFunc.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -71,7 +94,11 @@ public class NovoUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(getExtratoFunc.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

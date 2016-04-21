@@ -29,6 +29,4 @@ public class ClassFuncionario implements Serializable{
    public String getNome(){ return this.Nome; }
    public String getEmail(){ return this.Email; }
    public String getFuncao(){ return this.Funcao; }
-   
-    
 }

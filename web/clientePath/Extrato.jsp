@@ -3,6 +3,12 @@
     Created on : 06/04/2016, 16:22:42
     Author     : Júnior
 --%>
+<%@page import="Sources.ClassConta"%>
+<%@page import="Sources.ClassCorrentista"%>
+<%@page import="Sources.Bdquerys"%>
+<%@page import="Sources.Bdquerys"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Sources.ClassTransacao"%>
 <%@page import="java.io.IOException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -15,30 +21,31 @@
     </head>
     
         <h1>Ola Senhor(a) ${Correntista.nome} </h1><br>
-        <h2>Entre com o periodo desejado do extrato:</h2><br>
         <fieldset>
-            <legend>Periodo</legend>
-            
-            <form id="Periodo" method="POST" action="Extrato.jsp">
-                Data Inicial (dd/mm/aaaa): <input type="text" name="data"><br><br>
+            <legend>Extrato</legend>
+            <%
+                ClassConta s = (ClassConta) request.getSession().getAttribute("Conta");
+                String conta = s.getNumero();
+                Bdquerys bd = new Bdquerys();
+                ArrayList<ClassTransacao> arr = bd.getAllExtrato(conta);
                 
-                Intervalo: <input type="text" name="intervalo"><br><br>
+                out.println("<h1>Transacoes</h1><br><br>");
+                out.println("<table border=\"1\" style=\"width:100%\">");
+                out.println("<tr>");
+                out.println("<th>Tipo</th>");
+                out.println("<th>Nro. Conta</th>");
+                out.println("<th>Nro. Conta Transf</th>");
+                out.println("<th>Valor</th>");
+                out.println("</tr>");
                 
-                <input type="submit" value="Consultar">
-            </form>
-            
+                for(ClassTransacao it : arr) {
+                    out.println("<tr>");
+                    out.println("<td>" + it.getTipo() + "</td>");
+                    out.println("<td>" + it.getNroConta()+ "</td>");
+                    out.println("<td>" + it.getNroContaTransf()+ "</td>");
+                    out.println("<td>" + it.getValor()+ "</td>");
+                    out.println("</tr>");                
+                }
+            %>
         </fieldset>
-        
-        <% 
-            if (request.getMethod().equals("POST")) {
-                //BDQuerys bd;
-                String data = request.getParameter("data");
-                String intervalo = request.getParameter("intervalo");
-                int dia = (data.charAt(0) - '0') * 10 + data.charAt(1) - '0';
-                int mes = (data.charAt(3) - '0') * 10 + data.charAt(4) - '0';
-                int ano = (data.charAt(6) - '0') * 1000 + (data.charAt(7) - '0') * 100 + (data.charAt(8) - '0') * 10 + data.charAt(9) - '0';
-                
-            }
-        %>
-    
 </html>

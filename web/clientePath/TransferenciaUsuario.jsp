@@ -4,7 +4,7 @@
     Author     : Júnior
 --%>
 
-<%@page import="Sources.BDQuerys"%>
+<%@page import="Sources.Bdquerys"%>
 <%@page import="Sources.ClassConta"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,7 +16,6 @@
     <body>
         <h1>
             <h2>Ola Senhor(a) ${Correntista.nome}, conta numero ${Conta.numero}</h2>
-            <a href="HomeUser.jsp"><i>Home</i></a><br><br>
             <form id="TransferenciaUsuario" method="POST" action="TransferenciaUsuario.jsp">
                 Numero da Conta de Destino: <input type="text" name="contaDest"><br><br>
                 Valor (R$): <input type="text" name="valor"><br><br>
@@ -27,7 +26,7 @@
     
     <% 
         if (request.getMethod().equals("POST")) {
-            BDQuerys bd = new BDQuerys();
+            Bdquerys bd = new Bdquerys();
             String numeroConta = request.getParameter("contaDest");
             double qtd = Double.parseDouble(request.getParameter("valor"));
             Object conta = request.getSession().getAttribute("Conta");
