@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.*;
+import javax.servlet.*; 
 import javax.servlet.http.*;
 
 public class ProcessaLogins extends HttpServlet {
@@ -24,17 +24,13 @@ public class ProcessaLogins extends HttpServlet {
         try {
             String CPF = bd.verifyInfo(username, senha, numero);
             if (CPF != null){
-                
                 ClassConta Conta = bd.getConta(numero);
-                request.getSession().setAttribute("Conta", Conta);
-                
-                ClassCorrentista Correntista = bd.getCorrentista(CPF);
-                request.getSession().setAttribute("Correntista", Correntista);
-                
-                //ClassTransacao Transacao = bd.getTransacao(CPF);
-                //request.getSession().setAttribute("Transacao", Transacao);
-                
-                address = "/clientePath/HomeUser.jsp";
+                if(Conta != null) {
+                    request.getSession().setAttribute("Conta", Conta);            
+                    ClassCorrentista Correntista = bd.getCorrentista(CPF);
+                    request.getSession().setAttribute("Correntista", Correntista);
+                    address = "/clientePath/HomeUser.jsp";
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProcessaLogins.class.getName()).log(Level.SEVERE, null, ex);

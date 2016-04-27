@@ -41,7 +41,7 @@ public class NovoCorrentista extends HttpServlet {
             String Email = request.getParameter("Email");
             String Username = request.getParameter("Username");
             String Senha = request.getParameter("Senha");
-            Bdquerys bd = new Bdquerys();
+            QuerysBd bd = new QuerysBd();
             bd.createUser(Nome, CPF, Endereco, Email, Username, Senha);
             out.println("<br>Novo Usuário Criado</br>");
         }

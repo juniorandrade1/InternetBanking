@@ -88,7 +88,9 @@ public class NovaConta extends HttpServlet {
             
             QuerysBd bd = new QuerysBd();
             bd.createConta(pCorr, sCorr, tCorr, saldo, limite);
-            out.println("Conta Criada");
+            out.println("Conta Criada<br>");
+            ClassConta cc = bd.getConta(pCorr, sCorr, tCorr);
+            out.println("A conta é de numero: " + cc.getNumero());
         }
     }
 
