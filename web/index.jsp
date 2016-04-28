@@ -9,16 +9,18 @@
     <BODY>
         <fieldset>
             <legend>Tela de Login</legend>
-            <form id="Login" method="get" action="ShowBalance">
+            <form id="Login" method="post" action="/InternetBanking/ProcessaLogins">
                 Username: <input type="text" name="username"><br><br>
                 Numero da Conta: <input type="text" name="numero"><br><br>
                 Senha: <input type="password" name="senha"><br><br>
+                <input type="hidden" name="formName" value="Login">
                 <input type="submit" value="Efetuar Login">
                 
             </form>
-            <form action="LoginFuncionarios">
-                <input type="submit" value="Acesso para Funcionarios">
-            </form>
+            <a href="LoginFuncionarios.jsp">
+                <button>Acesso Funcionarios</button>
+            </a>
+            
         </fieldset>
         <br>
     </BODY>

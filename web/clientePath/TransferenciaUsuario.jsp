@@ -4,8 +4,9 @@
     Author     : Júnior
 --%>
 
+<%@page import="Model.ClassConta"%>
+<%@page import="Sources.QuerysBd"%>
 <%@page import="Sources.Bdquerys"%>
-<%@page import="Sources.ClassConta"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,12 +22,13 @@
                 Valor (R$): <input type="text" name="valor"><br><br>
                 <input type="submit" value="Efetuar Transferencia">
             </form>
+            
         </h1>
     </body>
     
     <% 
         if (request.getMethod().equals("POST")) {
-            Bdquerys bd = new Bdquerys();
+            QuerysBd bd = new QuerysBd();
             String numeroConta = request.getParameter("contaDest");
             double qtd = Double.parseDouble(request.getParameter("valor"));
             Object conta = request.getSession().getAttribute("Conta");

@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>ShowBalance</servlet-name>
-        <servlet-class>Sources.ProcessaLogins</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>LoginFuncionarios</servlet-name>
         <servlet-class>Sources.LoginFuncionarios</servlet-class>
     </servlet>
@@ -28,10 +24,18 @@
         <servlet-name>NovoCorrentista</servlet-name>
         <servlet-class>Sources.NovoCorrentista</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>ShowBalance</servlet-name>
-        <url-pattern>/ShowBalance</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>ProcessaLogins</servlet-name>
+        <servlet-class>Sources.ProcessaLogins</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>goSaque</servlet-name>
+        <servlet-class>Sources.goSaque</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>goDeposito</servlet-name>
+        <servlet-class>Sources.goDeposito</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginFuncionarios</servlet-name>
         <url-pattern>/LoginFuncionarios</url-pattern>
@@ -55,5 +59,17 @@
     <servlet-mapping>
         <servlet-name>NovoCorrentista</servlet-name>
         <url-pattern>/NovoCorrentista</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProcessaLogins</servlet-name>
+        <url-pattern>/ProcessaLogins</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>goSaque</servlet-name>
+        <url-pattern>/goSaque</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>goDeposito</servlet-name>
+        <url-pattern>/goDeposito</url-pattern>
     </servlet-mapping>
 </web-app>

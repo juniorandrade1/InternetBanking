@@ -1,9 +1,9 @@
 package Sources;
 
-import Sources.ClassConta;
-import Sources.ClassCorrentista;
-import Sources.ClassFuncionario;
-import Sources.ClassTransacao;
+import Model.ClassConta;
+import Model.ClassCorrentista;
+import Model.ClassFuncionario;
+import Model.ClassTransacao;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.DriverManager;
@@ -317,6 +317,18 @@ public class QuerysBd {
             
         }
     }
+
+    void goSaque(String numero, Double valor) throws SQLException {
+        updateTransferencia("saque", numero, null, valor);
+        updateSaldo(numero, -valor);
+    
+    }
+    
+    void goDeposito(String numero, Double valor) throws SQLException {
+        updateTransferencia("deposito", numero, null, valor);
+        updateSaldo(numero, valor);
+    }
+    
 
 
 }

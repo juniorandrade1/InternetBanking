@@ -1,4 +1,4 @@
-    <%@page import="Sources.ClassFuncionario"%>
+<%@page import="Model.ClassFuncionario"%>
 <%-- 
     Document   : HomeFunc
     Created on : 06/04/2016, 14:49:45
@@ -24,7 +24,9 @@
                 <%
             }
         %>     
-       
+
+        <a href="funcionarioPath/Saque.jsp">Realizar Saque</a><br>
+        <a href="funcionarioPath/Deposito.jsp">Realizar Deposito</a><br>
         <a href="funcionarioPath/TransferenciaFuncionario.jsp">Realizar Transferencia</a><br>
         <a href="funcionarioPath/SaldoFuncionario.jsp">Verificar Saldo</a><br>
         <a href="funcionarioPath/ExtratoFuncionario.jsp">Verificar Extrato</a><br>

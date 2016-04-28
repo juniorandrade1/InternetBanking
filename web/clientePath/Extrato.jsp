@@ -3,12 +3,13 @@
     Created on : 06/04/2016, 16:22:42
     Author     : Júnior
 --%>
-<%@page import="Sources.ClassConta"%>
-<%@page import="Sources.ClassCorrentista"%>
+<%@page import="Model.ClassTransacao"%>
+<%@page import="Sources.QuerysBd"%>
+<%@page import="Model.ClassConta"%>
+<%@page import="Model.ClassCorrentista"%>
 <%@page import="Sources.Bdquerys"%>
 <%@page import="Sources.Bdquerys"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="Sources.ClassTransacao"%>
 <%@page import="java.io.IOException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -26,7 +27,7 @@
             <%
                 ClassConta s = (ClassConta) request.getSession().getAttribute("Conta");
                 String conta = s.getNumero();
-                Bdquerys bd = new Bdquerys();
+                QuerysBd bd = new QuerysBd();
                 ArrayList<ClassTransacao> arr = bd.getAllExtrato(conta);
                 
                 out.println("<h1>Transacoes</h1><br><br>");

@@ -4,8 +4,8 @@
     Author     : Júnior
 --%>
 
-<%@page import="Sources.Bdquerys"%>
-<%@page import="Sources.ClassConta"%>
+<%@page import="Sources.QuerysBd"%>
+<%@page import="Model.ClassConta"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -27,7 +27,7 @@
     <% 
         if (request.getMethod().equals("POST")) {
             
-            Bdquerys bd = new Bdquerys();
+            QuerysBd bd = new QuerysBd();
             String ContaDestino = request.getParameter("contaDestino");
             String ContaSaida = request.getParameter("contaSaida");
             

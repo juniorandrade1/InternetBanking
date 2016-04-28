@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Sources;
-
+import Model.ClassTransacao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -30,6 +30,7 @@ public class getExtratoFunc extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -37,11 +38,11 @@ public class getExtratoFunc extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             //out.println("AQUI");
             
-            Bdquerys bd = new Bdquerys();
+            QuerysBd bd = new QuerysBd();
             String val = request.getParameter("codigo");
             ArrayList<ClassTransacao>arr = bd.getAllExtrato(val);
-            out.println("<h1>Transacoes</h1><br><br>");
-                
+            
+            out.println("<h1>Transacoes</h1><br><br>");                
             out.println("<table border=\"1\" style=\"width:100%\">");
             out.println("<tr>");
             out.println("<th>Tipo</th>");
