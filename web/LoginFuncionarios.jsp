@@ -1,9 +1,3 @@
-<%-- 
-    Document   : LoginFuncionarios
-    Created on : 27/04/2016, 19:51:11
-    Author     : Júnior
-
---%>
 
 
 

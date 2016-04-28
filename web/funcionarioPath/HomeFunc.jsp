@@ -1,9 +1,4 @@
 <%@page import="Model.ClassFuncionario"%>
-<%-- 
-    Document   : HomeFunc
-    Created on : 06/04/2016, 14:49:45
-    Author     : Júnior
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

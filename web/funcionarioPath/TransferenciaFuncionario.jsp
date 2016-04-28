@@ -1,8 +1,4 @@
-<%-- 
-    Document   : Transferencia
-    Created on : 06/04/2016, 16:22:24
-    Author     : Júnior
---%>
+
 
 <%@page import="Sources.QuerysBd"%>
 <%@page import="Model.ClassConta"%>
@@ -14,14 +10,14 @@
         <title>Transferencia</title>
     </head>
     <body>
-        <h1>
+        <h1>Ola Senhor(a) ${Funcionario.nome}, funcionario do tipo ${Funcionario.funcao} </h1><br>
             <form id="TransferenciaFuncionario" method="POST" action="TransferenciaFuncionario.jsp">
                 Numero da Conta de Saida: <input type="text" name="contaSaida"><br><br>
                 Numero da Conta de Destino: <input type="text" name="contaDestino"><br><br>
                 Valor (R$): <input type="text" name="valor"><br><br>
                 <input type="submit" value="Efetuar Transferencia">
             </form>
-        </h1>
+        
     </body>
     
     <% 

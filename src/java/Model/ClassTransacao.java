@@ -7,10 +7,6 @@ package Model;
 
 import java.io.Serializable;
 
-/**
- *
- * @author Júnior
- */
 public class ClassTransacao implements Serializable{
     private String Codigo;
     private String Tipo;

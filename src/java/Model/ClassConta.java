@@ -9,10 +9,6 @@ import java.io.Serializable;
  * and open the template in the editor.
  */
 
-/**
- *
- * @author Júnior
- */
 public class ClassConta implements Serializable{
     String Numero;
     String PrimeiroCorr;

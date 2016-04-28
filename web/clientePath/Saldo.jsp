@@ -1,8 +1,3 @@
-<%-- 
-    Document   : SaldoCliente
-    Created on : 06/04/2016, 16:07:04
-    Author     : Júnior
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

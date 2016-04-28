@@ -7,6 +7,7 @@ package Sources;
  */
 
 import Model.ClassConta;
+import Model.ClassCorrentista;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -17,10 +18,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Júnior
- */
 public class NovaConta extends HttpServlet {
 
     /**
@@ -33,8 +30,10 @@ public class NovaConta extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
-    boolean existUser(String cpf){
-        return true;
+    boolean existUser(String cpf) throws SQLException{
+        QuerysBd bd = new QuerysBd();
+        ClassCorrentista cc = bd.getCorrentista(cpf);
+        return cc != null;
     }
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

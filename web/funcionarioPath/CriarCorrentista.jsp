@@ -1,8 +1,4 @@
-<%-- 
-    Document   : CriarCorrentista
-    Created on : 21/04/2016, 00:02:22
-    Author     : Júnior
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

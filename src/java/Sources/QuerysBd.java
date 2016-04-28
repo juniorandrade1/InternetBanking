@@ -185,10 +185,16 @@ public class QuerysBd {
             Logger.getLogger(Bdquerys.class.getName()).log(Level.SEVERE, null, ex);
         }
         try (Connection c = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/JAVABANK", "root", "")) {
+            ClassConta cc = getConta(conta);
+            if(cc.getSaldo() + value < -cc.getLimite()) {
+                return;
+            }
+            
             pstmt = (PreparedStatement) c.prepareStatement(setSaldo);
             pstmt.setDouble(1, value);
             pstmt.setString(2, conta);
             pstmt.execute();
+            
         }
     }
     public void goTransferencia(String from, String to, double w) throws SQLException {

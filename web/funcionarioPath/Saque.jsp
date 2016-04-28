@@ -1,8 +1,3 @@
-<%-- 
-    Document   : ExtratoFuncionario
-    Created on : 08/04/2016, 03:02:24
-    Author     : Júnior
---%>
 
 <%@page import="java.io.IOException"%>
 <%@page import="java.io.IOException"%>

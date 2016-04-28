@@ -1,8 +1,3 @@
-<%-- 
-    Document   : Transferencia
-    Created on : 06/04/2016, 16:22:24
-    Author     : Júnior
---%>
 
 <%@page import="Model.ClassConta"%>
 <%@page import="Sources.QuerysBd"%>

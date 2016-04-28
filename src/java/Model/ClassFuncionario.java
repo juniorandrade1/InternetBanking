@@ -9,10 +9,6 @@ import java.io.Serializable;
  * and open the template in the editor.
  */
 
-/**
- *
- * @author Júnior
- */
 public class ClassFuncionario implements Serializable{
    private String Codigo, Nome, Email, Funcao;
    public ClassFuncionario(String a, String b, String c, String d) {

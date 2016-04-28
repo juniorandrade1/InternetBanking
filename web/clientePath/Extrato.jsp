@@ -1,8 +1,4 @@
-<%-- 
-    Document   : Extrato
-    Created on : 06/04/2016, 16:22:42
-    Author     : Júnior
---%>
+
 <%@page import="Model.ClassTransacao"%>
 <%@page import="Sources.QuerysBd"%>
 <%@page import="Model.ClassConta"%>
