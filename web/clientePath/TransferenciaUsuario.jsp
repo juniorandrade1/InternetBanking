@@ -1,4 +1,3 @@
-
 <%@page import="Model.ClassConta"%>
 <%@page import="Sources.QuerysBd"%>
 <%@page import="Sources.Bdquerys"%>
@@ -10,6 +9,8 @@
         <title>Transferencia</title>
     </head>
     <body>
+        <a href="/InternetBanking/clientePath/HomeUser.jsp">Home</a><br>
+         <a href="/InternetBanking/Logoff">Logoff</a><br>
         <h1>
             <h2>Ola Senhor(a) ${Correntista.nome}, conta numero ${Conta.numero}</h2>
             <form id="TransferenciaUsuario" method="POST" action="TransferenciaUsuario.jsp">

@@ -16,7 +16,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Extrato</title>
     </head>
-    
+    <body>
+        <a href="/InternetBanking/clientePath/HomeUser.jsp">Home</a><br>
+         <a href="/InternetBanking/Logoff">Logoff</a><br>
         <h1>Ola Senhor(a) ${Correntista.nome} </h1><br>
         <fieldset>
             <legend>Extrato</legend>
@@ -45,4 +47,5 @@
                 }
             %>
         </fieldset>
+        </body>
 </html>

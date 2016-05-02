@@ -9,8 +9,8 @@
     <BODY>
         <TABLE BORDER=5 ALIGN="CENTER">
             <TR><TH CLASS="TITLE">
-                    Cliente desconhecido</TABLE>
+                    Usuario desconhecido</TABLE>
         <P>
-            Identificador de cliente não cadastrado.
+            Por favor, reinsira os dados corretamente
     </BODY>
 </HTML>

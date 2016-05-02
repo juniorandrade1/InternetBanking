@@ -4,19 +4,22 @@
  * and open the template in the editor.
  */
 package Sources;
-import Model.ClassTransacao;
+
+import Model.ClassLogged;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.faces.context.FacesContext;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class getExtratoFunc extends HttpServlet {
+/**
+ *
+ * @author Júnior
+ */
+public class Logoff extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -26,38 +29,15 @@ public class getExtratoFunc extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-            QuerysBd bd = new QuerysBd();
-            String val = request.getParameter("codigo");
-            ArrayList<ClassTransacao>arr = bd.getAllExtrato(val);
-            out.println("<a href=\"/InternetBanking/funcionarioPath/HomeFunc.jsp\">Home</a><br>");
-            if(arr != null) { 
-                out.println("<h1>Transacoes da conta " + val + "</h1><br><br>");                
-                out.println("<table border=\"1\" style=\"width:100%\">");
-                out.println("<tr>");
-                out.println("<th>Tipo</th>");
-                out.println("<th>Nro. Conta</th>");
-                out.println("<th>Nro. Conta Transf</th>");
-                out.println("<th>Valor</th>");
-                out.println("</tr>");
-
-
-                for(ClassTransacao it : arr) {
-                    out.println("<tr>");
-                    out.println("<td>" + it.getTipo() + "</td>");
-                    out.println("<td>" + it.getNroConta()+ "</td>");
-                    out.println("<td>" + it.getNroContaTransf()+ "</td>");
-                    out.println("<td>" + it.getValor()+ "</td>");
-                    out.println("</tr>");
-                }
-                out.println("</table>");
-            }
+           request.getSession().setAttribute("Logged", new ClassLogged(false));
+           String address = "index.jsp";
+           RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+           dispatcher.forward(request, response);
         }
     }
 
@@ -73,11 +53,7 @@ public class getExtratoFunc extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(getExtratoFunc.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -91,11 +67,7 @@ public class getExtratoFunc extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(getExtratoFunc.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

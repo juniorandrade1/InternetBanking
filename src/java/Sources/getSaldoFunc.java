@@ -38,10 +38,11 @@ public class getSaldoFunc extends HttpServlet {
             String val = request.getParameter("codigo");
             ArrayList<ClassTransacao>arr = bd.getAllExtrato(val);
             ClassConta conta = bd.getConta(val);
-            //out.println("<a href=\"/funcionarioPath/HomeFunc.jsp\"><i>Home</i></a><br><br>");
-            out.println("<h1>Saldo do usuário " + val + ": R$ " + conta.getSaldo() + "</h1>");
-            
+            out.println("<a href=\"/InternetBanking/funcionarioPath/HomeFunc.jsp\">Home</a><br>");
+            if(conta == null) out.println("<h1>Conta não encontrada</h1>");
+            else out.println("<h1>Saldo do usuário " + val + ": R$ " + conta.getSaldo() + "</h1>");
         }
+        
     }
     
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

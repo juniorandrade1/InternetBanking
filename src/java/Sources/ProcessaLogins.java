@@ -3,6 +3,7 @@ package Sources;
 import Model.ClassCorrentista;
 import Model.ClassConta;
 import Model.ClassFuncionario;
+import Model.ClassLogged;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.io.*;
@@ -26,17 +27,14 @@ public class ProcessaLogins extends HttpServlet {
             String numero = request.getParameter("numero");
             String address = address = "WEB-INF/UnknownCustomer.jsp";
             try {
-                String CPF = bd.verifyInfo(username, senha, numero);
+                String CPF = bd.verifyInfo(username, senha, numero, 0);
                 if (CPF != null){
+                    ClassCorrentista Correntista = bd.getCorrentista(CPF);
                     ClassConta Conta = bd.getConta(numero);
-                    if(Conta != null) {
-                        request.getSession().setAttribute("Conta", Conta);            
-                        ClassCorrentista Correntista = bd.getCorrentista(CPF);
-                        if(Correntista != null) {
-                            request.getSession().setAttribute("Correntista", Correntista);
-                            address = "/clientePath/HomeUser.jsp";
-                        }
-                    }
+                    request.getSession().setAttribute("Conta", Conta);
+                    request.getSession().setAttribute("Correntista", Correntista);
+                    request.getSession().setAttribute("Logged", new ClassLogged());
+                    address = "/clientePath/HomeUser.jsp";
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(ProcessaLogins.class.getName()).log(Level.SEVERE, null, ex);
@@ -52,18 +50,17 @@ public class ProcessaLogins extends HttpServlet {
             String numero = request.getParameter("numero");
             String address = address = "WEB-INF/UnknownCustomer.jsp";
             try {
-                String CPF = bd.verifyInfo(username, senha, numero);
-                if (CPF != null){
-                    ClassFuncionario Funcionario = bd.getFuncionario(numero);
+                    String codigoAcesso = bd.verifyInfo(username, senha, numero, 1);
+                    ClassFuncionario Funcionario = bd.getFuncionario(codigoAcesso);
                     if(Funcionario != null) {
                        request.getSession().setAttribute("Funcionario", Funcionario);
+                       request.getSession().setAttribute("Logged", new ClassLogged(true));
                        address = "/funcionarioPath/HomeFunc.jsp";
                     }
-                }
-            } catch (SQLException ex) {
-                //System.out.println("DEU RUIM");
+                } catch (SQLException ex) {
                 Logger.getLogger(ProcessaLogins.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
             RequestDispatcher dispatcher = request.getRequestDispatcher(address);
             dispatcher.forward(request, response);
         }

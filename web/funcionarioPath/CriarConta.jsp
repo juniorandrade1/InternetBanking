@@ -1,5 +1,6 @@
 
 
+<%@page import="Model.ClassLogged"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -8,6 +9,16 @@
         <title>Criar Conta</title>
     </head>
     <body>
+        <%
+            ClassLogged log = (ClassLogged) request.getSession().getAttribute("Logged");
+            if(log.getLog() == false) {
+                out.println("Você não está loggado!<br><br>");
+                %><a href="/InternetBanking/Logoff">Sair</a><br><%
+            }
+            else {
+        %>
+        <a href="/InternetBanking/funcionarioPath/HomeFunc.jsp">Home</a><br>
+        <a href="/InternetBanking/Logoff">Logoff</a><br>
         <h1>
             <b>Nova Conta</b><br>
             <h2>
@@ -25,5 +36,8 @@
             Limite: <input type="text" name="limite"><br><br>
             <input type="submit" value="Criar Conta">
         </form>
+        <%
+            }
+        %>
     </body>
 </html>

@@ -30,12 +30,17 @@ public class goDeposito extends HttpServlet {
             throws ServletException, IOException, SQLException {
        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {   
-            QuerysBd bd = new QuerysBd();
-            String numero = request.getParameter("numero");
-            Double valor = Double.parseDouble(request.getParameter("valor"));
-            bd.goDeposito(numero, valor);
+           out.println("<a href=\"/InternetBanking/funcionarioPath/HomeFunc.jsp\">Home</a><br>");
+           QuerysBd bd = new QuerysBd();
+           String numero = request.getParameter("numero");
+           Double valor = Double.parseDouble(request.getParameter("valor"));
+           try {
+               bd.goDeposito(numero, valor);
+           } catch (Exception ex) {
+               out.println("<h1>Conta Invalida</h1>");
+               return;
+           }
             out.println("<h1>Transação Realizada com sucesso!<br></h1>");
-            
         }
     }
 

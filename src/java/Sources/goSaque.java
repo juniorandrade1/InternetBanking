@@ -30,13 +30,19 @@ public class goSaque extends HttpServlet {
             throws ServletException, IOException, SQLException {
        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {   
-            QuerysBd bd = new QuerysBd();
-            String numero = request.getParameter("numero");
-            Double valor = Double.parseDouble(request.getParameter("valor"));
-            
-            bd.goSaque(numero, valor);
-            out.println("<h1>Transação Realizada com sucesso!<br></h1>");
-            
+           out.println("<a href=\"/InternetBanking/funcionarioPath/HomeFunc.jsp\">Home</a><br>");
+           QuerysBd bd = new QuerysBd();
+           String numero = request.getParameter("numero");
+           Double valor = Double.parseDouble(request.getParameter("valor"));
+           
+           try {
+               bd.goSaque(numero, valor);
+           } catch (Exception ex) {
+               if(ex.equals("Saldo Insuficiente") == true) out.println("<h1>Saldo Insuficiente</h1><br>");
+               else out.println("<h1>Conta Invalida</h1>");
+               return;
+           }
+           out.println("<h1>Transação Realizada com sucesso!<br></h1>"); 
         }
     }
 

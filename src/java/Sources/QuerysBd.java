@@ -17,7 +17,9 @@ import java.util.logging.Logger;
 public class QuerysBd {
     public QuerysBd(){};
     
-    private final String getLogin = "select * from LOGINS where username = ? and senha = ? and numeroConta = ?";
+    private final String getLogin = "select * from CONTA, CORRENTISTA where Email = ? and Senha = ? and Numero = ? and (Primeiro_Corr = CPF or Segundo_Corr = CPF or Terceiro_Corr = CPF)";
+    private final String getLoginFunc = "select * from FUNCIONARIO where Codigo = ? and Email = ? and Senha = ?";
+    
     private final String getConta = "select * from CONTA where Numero = ?";
    
     private final String getContaCorr1 = "select * from CONTA where Primeiro_Corr = ?";
@@ -33,7 +35,7 @@ public class QuerysBd {
     private final String getAllExtrato = "select * from TRANSACAO where Nro_Conta = ? or Nro_Conta_Transf = ?";
     
     
-    private final String insertCorrentista = "insert into CORRENTISTA (Nome, CPF, Endereco, Email, Username, Senha) values (?,?,?,?,?,?)";
+    private final String insertCorrentista = "insert into CORRENTISTA (Nome, CPF, Endereco, Email, Senha) values (?,?,?,?,?)";
     private final String insertLogins = "insert into LOGINS (numeroConta, username, senha, CPF) values (?, ?,?,?)";
     
     private final String insertConta1 = "insert into CONTA (Primeiro_Corr, Saldo, Limite) values(?,?,?)";
@@ -44,23 +46,41 @@ public class QuerysBd {
     private PreparedStatement aux;
    
     
-    public String verifyInfo(String username, String senha, String numero) throws SQLException {
+    public String verifyInfo(String username, String senha, String numero, int option) throws SQLException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Bdquerys.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String s;
-        try (Connection c = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/JAVABANK", "root", "")) {
-            pstmt = (PreparedStatement) c.prepareStatement(getLogin);
-            pstmt.setString(1, username);
-            pstmt.setString(2, senha);
-            pstmt.setString(3, numero);
-            ResultSet rs = pstmt.executeQuery();
-            s = null;
-            while(rs.next()) s = rs.getString(4);
+        
+        if(option == 0) { 
+            String s;
+            try (Connection c = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/JAVABANK", "root", "")) {
+                pstmt = (PreparedStatement) c.prepareStatement(getLogin);
+                pstmt.setString(1, username);
+                pstmt.setString(2, senha);
+                pstmt.setString(3, numero);
+
+                ResultSet rs = pstmt.executeQuery();
+                s = null;
+                while(rs.next()) s = rs.getString("CPF");
+            }
+            return s;
         }
-        return s;
+        else {
+            String s;
+            try (Connection c = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/JAVABANK", "root", "")) {
+                pstmt = (PreparedStatement) c.prepareStatement(getLoginFunc);
+                pstmt.setString(1, numero);
+                pstmt.setString(2, username);
+                pstmt.setString(3, senha);
+
+                ResultSet rs = pstmt.executeQuery();
+                s = null;
+                while(rs.next()) s = rs.getString("Codigo");
+            }
+            return s;
+        }
     }    
     public ClassConta getConta(String numero) throws SQLException {
         try {
@@ -130,13 +150,12 @@ public class QuerysBd {
             cc = new ClassCorrentista("", "", "", "", "", "");
             while(rs.next()) {
                 String Nome = rs.getString("Nome"), Endereco = rs.getString("Endereco"), Email = rs.getString("Email");
-                String Username = rs.getString("Username"), Senha = rs.getString("Senha");
+                String Senha = rs.getString("Senha");
                
                 cc.setCPF(CPF);
                 cc.setNome(Nome);
                 cc.setEndereco(Endereco);
                 cc.setEmail(Email);
-                cc.setUsername(Username);
                 cc.setSenha(Senha);
             }
         }
@@ -156,7 +175,8 @@ public class QuerysBd {
             cc = null;
             while(rs.next()) {
                 String cpf = CPF, Nome = rs.getString(2), Endereco = rs.getString(3), Email = rs.getString(4);   
-                cc = new ClassFuncionario(cpf, Nome, Endereco, Email);
+                String Senha = rs.getString(5);
+                cc = new ClassFuncionario(cpf, Nome, Endereco, Email, Senha);
             }
         }
         return cc;
@@ -178,7 +198,7 @@ public class QuerysBd {
             pstmt.execute();
         }
     }  
-    public void updateSaldo(String conta, double value) throws SQLException {
+    public void updateSaldo(String conta, double value) throws SQLException, Exception {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
@@ -187,8 +207,8 @@ public class QuerysBd {
         try (Connection c = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/JAVABANK", "root", "")) {
             ClassConta cc = getConta(conta);
             if(cc.getSaldo() + value < -cc.getLimite()) {
-                return;
-            }
+                throw new Exception("Saldo Insuficiente");
+            }       
             
             pstmt = (PreparedStatement) c.prepareStatement(setSaldo);
             pstmt.setDouble(1, value);
@@ -197,7 +217,7 @@ public class QuerysBd {
             
         }
     }
-    public void goTransferencia(String from, String to, double w) throws SQLException {
+    public void goTransferencia(String from, String to, double w) throws SQLException, Exception {
         updateSaldo(from, -w);
         updateSaldo(to, w);
         updateTransferencia("transf", from, to, w);
@@ -226,7 +246,7 @@ public class QuerysBd {
         }
         return arr;
     } 
-    public void createCorrentista(String Nome, String CPF, String Endereco, String Email, String Username, String Senha) throws SQLException {
+    public void createCorrentista(String Nome, String CPF, String Endereco, String Email, String Senha) throws SQLException {
          try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
@@ -239,8 +259,7 @@ public class QuerysBd {
             pstmt.setString(2, CPF);
             pstmt.setString(3, Endereco);
             pstmt.setString(4, Email);
-            pstmt.setString(5, Username);
-            pstmt.setString(6, Senha);
+            pstmt.setString(5, Senha);
             pstmt.execute(); 
         }
     }
@@ -260,12 +279,10 @@ public class QuerysBd {
             pstmt.execute(); 
         }
     } 
-    public void createUser(String Nome, String CPF, String Endereco, String Email, String Username, String Senha) throws SQLException {
+    public void createUser(String Nome, String CPF, String Endereco, String Email, String Senha) throws SQLException {
         //System.out.println(Nome + " " + CPF + " " + Endereco + " " + Email);
-        createCorrentista(Nome, CPF, Endereco, Email, Username, Senha);
+        createCorrentista(Nome, CPF, Endereco, Email, Senha);
     }
-    
-    
     public void createConta(String pC, String sC, String tC, double valor, double limite) throws SQLException  {
          try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -296,45 +313,15 @@ public class QuerysBd {
                 pstmt.setDouble(4, valor);
                 pstmt.setDouble(5, limite);
             }
-            pstmt.execute(); 
-            
-            ClassConta cc = getConta(pC, sC, tC);
-            //System.out.println(cc.getNumero());
-            
-            if(tC != null) {
-               ClassCorrentista a = getCorrentista(tC);
-               createLogins(cc.getNumero(), a.getUsername(), a.getSenha(), a.getCPF());
-            }
-            if(sC != null) {
-              ClassCorrentista a = getCorrentista(sC);
-               createLogins(cc.getNumero(), a.getUsername(), a.getSenha(), a.getCPF());
-            }
-            if(pC != null) {
-                ClassCorrentista a = getCorrentista(pC);
-               createLogins(cc.getNumero(), a.getUsername(), a.getSenha(), a.getCPF());
-            }
-            
-               
-            
-            
-            
-            
-            
-            
+            pstmt.execute();   
         }
     }
-
-    void goSaque(String numero, Double valor) throws SQLException {
-        updateTransferencia("saque", numero, null, valor);
+    void goSaque(String numero, Double valor) throws SQLException, Exception {
         updateSaldo(numero, -valor);
-    
+        updateTransferencia("saque", numero, null, valor);
     }
-    
-    void goDeposito(String numero, Double valor) throws SQLException {
-        updateTransferencia("deposito", numero, null, valor);
+    void goDeposito(String numero, Double valor) throws SQLException, Exception {
         updateSaldo(numero, valor);
+        updateTransferencia("deposito", numero, null, valor);
     }
-    
-
-
 }

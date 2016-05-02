@@ -8,9 +8,12 @@
         <title>Home Page</title>
     </head>
     <body>
+        <a href="/InternetBanking/clientePath/HomeUser.jsp">Home</a><br>
+        
+         <a href="/InternetBanking/Logoff">Logoff</a><br>
         <h1>Ola Senhor(a) ${Correntista.nome}, conta ${Conta.numero} </h1><br>
-        <a href="clientePath/TransferenciaUsuario.jsp">Realizar Transferencia</a><br>
-        <a href="clientePath/Saldo.jsp">Verificar Saldo</a><br>
-        <a href="clientePath/Extrato.jsp">Verificar Extrato</a><br>
+        <a href="/InternetBanking/clientePath/TransferenciaUsuario.jsp">Realizar Transferencia</a><br>
+        <a href="/InternetBanking/clientePath/Saldo.jsp">Verificar Saldo</a><br>
+        <a href="/InternetBanking/clientePath/Extrato.jsp">Verificar Extrato</a><br>
     </body>
 </html>
