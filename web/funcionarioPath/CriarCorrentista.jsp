@@ -9,6 +9,7 @@
         <title>Criar Correntista</title>
     </head>
     <body>
+        
        <%
             ClassLogged log = (ClassLogged) request.getSession().getAttribute("Logged");
             if(log.getLog() == false) {
@@ -18,7 +19,8 @@
             else {
         %>
         <a href="/InternetBanking/funcionarioPath/HomeFunc.jsp">Home</a><br>
-         <a href="/InternetBanking/Logoff">Logoff</a><br>
+        <a href="/InternetBanking/Logoff">Logoff</a><br>
+        <h1>Ola Senhor(a) ${Funcionario.nome}, funcionario do tipo ${Funcionario.funcao} </h1><br>
         <form id="CriarCorrentista" method="POST" action="/InternetBanking/NovoCorrentista">     
             Nome: <input type="text" name="Nome"><br><br>
             CPF: <input type="text" name="CPF"><br><br>

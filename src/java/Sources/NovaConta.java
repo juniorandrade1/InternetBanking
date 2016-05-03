@@ -49,6 +49,9 @@ public class NovaConta extends HttpServlet {
             double limite = Double.parseDouble(request.getParameter("limite"));
             //
             
+            out.println(" <a href=\"/InternetBanking/funcionarioPath/HomeFunc.jsp\">Home</a><br>\n" +
+                "<a href=\"/InternetBanking/Logoff\">Logoff</a><br>");
+            
             
             System.out.println("Entrou aqui");
             
@@ -87,10 +90,20 @@ public class NovaConta extends HttpServlet {
             }
             
             QuerysBd bd = new QuerysBd();
-            bd.createConta(pCorr, sCorr, tCorr, saldo, limite);
-            out.println("Conta Criada<br>");
-            ClassConta cc = bd.getConta(pCorr, sCorr, tCorr);
-            out.println("A conta é de numero: " + cc.getNumero());
+            if(pCorr == null) {
+                out.println("<br>Usuário não pode ser criado<br>");
+            }
+            else {
+                try {
+                    bd.createConta(pCorr, sCorr, tCorr, saldo, limite);
+                    out.println("Conta Criada<br>");
+                    ClassConta cc = bd.getConta(pCorr, sCorr, tCorr);
+                    out.println("A conta é de numero: " + cc.getNumero());
+                }
+                catch (Exception ex) {
+                    out.println("<br>Usuário não pode ser criado<br>");
+                }
+            }
         }
     }
 

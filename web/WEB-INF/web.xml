@@ -40,6 +40,10 @@
         <servlet-name>Logoff</servlet-name>
         <servlet-class>Sources.Logoff</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NovoFuncionario</servlet-name>
+        <servlet-class>Sources.NovoFuncionario</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginFuncionarios</servlet-name>
         <url-pattern>/LoginFuncionarios</url-pattern>
@@ -79,5 +83,9 @@
     <servlet-mapping>
         <servlet-name>Logoff</servlet-name>
         <url-pattern>/Logoff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NovoFuncionario</servlet-name>
+        <url-pattern>/NovoFuncionario</url-pattern>
     </servlet-mapping>
 </web-app>

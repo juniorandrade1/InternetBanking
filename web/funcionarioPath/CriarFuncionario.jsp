@@ -1,12 +1,10 @@
-
-
 <%@page import="Model.ClassLogged"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Criar Conta</title>
+        <title>Criar Funcionario</title>
     </head>
     <body>
         <%
@@ -21,21 +19,15 @@
         <a href="/InternetBanking/Logoff">Logoff</a><br>
         <h1>Ola Senhor(a) ${Funcionario.nome}, funcionario do tipo ${Funcionario.funcao} </h1>
         <h1>
-            <b>Nova Conta</b><br>
-            <h2>
-                <br>Insira o CPF de Correntistas Validos<br>
-                O 1º Correntista é obrigatorio. Deixando os demais em branco, <br>
-                será considerado como não existente.<br>
-                <br>
-            </h2>
+            <b>Nova Conta para Funcionario</b><br>
         </h1>
-        <form id="CriarConta" method="POST" action="/InternetBanking/NovaConta">     
-            Primeiro Correntista: <input type="text" name="priCorr"><br><br>
-            Segundo Correntista: <input type="text" name="segCorr"><br><br>
-            Terceiro Correntista: <input type="text" name="terCorr"><br><br>
-            Saldo: <input type="text" name="saldo"><br><br>
-            Limite: <input type="text" name="limite"><br><br>
-            <input type="submit" value="Criar Conta">
+        
+        <form id="CriarContaFuncionario" method="POST" action="/InternetBanking/NovoFuncionario">     
+            Nome: <input type="text" name="nome"><br><br>
+            Email: <input type="text" name="email"><br><br>
+            Função: <input type="text" name="funcao"><br><br>
+            Senha: <input type="text" name="senha"><br><br>
+            <input type="submit" value="Criar conta">
         </form>
         <%
             }

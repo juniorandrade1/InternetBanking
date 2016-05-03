@@ -28,6 +28,7 @@ public class QuerysBd {
     
     private final String getCorrentista = "select * from CORRENTISTA where CPF = ?";
     private final String getFuncionario = "select * from FUNCIONARIO where Codigo = ?";
+    private final String getFuncionario2 = "select * from FUNCIONARIO where Nome = ? and Email = ? and Funcao = ? and Senha = ?";
     
     private final String setSaldo = "update CONTA set saldo = saldo + ? where Numero = ?";
     
@@ -41,6 +42,8 @@ public class QuerysBd {
     private final String insertConta1 = "insert into CONTA (Primeiro_Corr, Saldo, Limite) values(?,?,?)";
     private final String insertConta2 = "insert into CONTA (Primeiro_Corr, Segundo_Corr, Saldo, Limite) values(?,?,?,?)";
     private final String insertConta3 = "insert into CONTA (Primeiro_Corr, Segundo_Corr, Terceiro_Corr, Saldo, Limite) values(?,?,?,?,?)";
+    
+    private final String insertFunc = "insert into FUNCIONARIO (Nome, Email, Funcao, Senha) values(?,?,?,?)";
     
     private PreparedStatement pstmt;
     private PreparedStatement aux;
@@ -323,5 +326,48 @@ public class QuerysBd {
     void goDeposito(String numero, Double valor) throws SQLException, Exception {
         updateSaldo(numero, valor);
         updateTransferencia("deposito", numero, null, valor);
+    }
+
+    void createFunc(String Nome, String Email, String Funcao, String Senha) throws SQLException {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Bdquerys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ArrayList<ClassTransacao> arr;
+        try (Connection c = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/JAVABANK", "root", "")) {
+            pstmt = (PreparedStatement) c.prepareStatement(insertFunc);
+            pstmt.setString(1, Nome);
+            pstmt.setString(2, Email);
+            pstmt.setString(3, Funcao);
+            pstmt.setString(4, Senha);
+            pstmt.execute(); 
+        }
+    }
+    
+    ClassFuncionario getFuncionario2(String Nome, String Email, String Funcao, String Senha) throws SQLException {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Bdquerys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ClassFuncionario f = null;
+        try (Connection c = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/JAVABANK", "root", "")) {
+            pstmt = (PreparedStatement) c.prepareStatement(getFuncionario2);
+            pstmt.setString(1, Nome);
+            pstmt.setString(2, Email);
+            pstmt.setString(3, Funcao);
+            pstmt.setString(4, Senha);
+            ResultSet rs = pstmt.executeQuery(); 
+            while(rs.next()) {
+                String codigo = rs.getString(1);
+                String nome = rs.getString(2);
+                String endereco = rs.getString(3);
+                String email = rs.getString(4);
+                String senha = rs.getString(5);
+                f = new ClassFuncionario(codigo, nome, endereco, email, senha);
+            }
+        }
+        return f;
     }
 }

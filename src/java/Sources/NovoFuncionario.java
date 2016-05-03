@@ -5,9 +5,9 @@
  */
 package Sources;
 
+import Model.ClassFuncionario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class NovoCorrentista extends HttpServlet {
+public class NovoFuncionario extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,24 +32,24 @@ public class NovoCorrentista extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String Nome = request.getParameter("Nome");
-            String CPF = request.getParameter("CPF");
-            String Endereco = request.getParameter("Endereco");
-            String Email = request.getParameter("Email");
-            String Senha = request.getParameter("Senha");
-            out.println(" <a href=\"/InternetBanking/funcionarioPath/HomeFunc.jsp\">Home</a><br>\n" +
-            "<a href=\"/InternetBanking/Logoff\">Logoff</a><br>");
+            String Nome = request.getParameter("nome");
+            String Email = request.getParameter("email");
+            String Funcao = request.getParameter("funcao");
+            String Senha = request.getParameter("senha");
             QuerysBd bd = new QuerysBd();
             try {
-                bd.createUser(Nome, CPF, Endereco, Email, Senha);
-                out.println("<br>Novo Usuário Criado</br>");
+                bd.createFunc(Nome, Email, Funcao, Senha);
+                out.println(" <a href=\"/InternetBanking/funcionarioPath/HomeFunc.jsp\">Home</a><br>\n" +
+                "<a href=\"/InternetBanking/Logoff\">Logoff</a><br>");
+                
+                out.println("<br>Novo Funcionario Criado</br>");
+                ClassFuncionario cf = bd.getFuncionario2(Nome, Email, Funcao, Senha);
+                out.println("O numero de sua conta é: " + cf.getCodigo());
+                
             }
             catch (Exception ex) {
                 out.println("<br>Usuário não pode ser criado<br>");
             }
-        }
-        catch (Exception ex) {
-            out.println("<br>Usuário não pode ser criado<br>");
         }
     }
 

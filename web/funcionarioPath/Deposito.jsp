@@ -1,5 +1,6 @@
 
 
+<%@page import="Model.ClassLogged"%>
 <%@page import="java.io.IOException"%>
 <%@page import="java.io.IOException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -7,7 +8,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Pagina de Saque</title>
+        <title>Pagina de Deposito</title>
     </head>
     <body>
         <%
@@ -27,7 +28,7 @@
                 
                 <input type="submit" value="Realizar transação">   
         </form>
-     <%
+        <%
             }
         %>
     </body>

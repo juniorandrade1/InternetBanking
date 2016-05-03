@@ -27,6 +27,7 @@
                 %>
                     <a href="/InternetBanking/funcionarioPath/CriarCorrentista.jsp">Criar Correntista</a><br>
                     <a href="/InternetBanking/funcionarioPath/CriarConta.jsp">Criar Conta</a><br>
+                    <a href="/InternetBanking/funcionarioPath/CriarFuncionario.jsp">Criar Funcionario</a><br>
                 <%
             }
         %>     
